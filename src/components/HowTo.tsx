@@ -24,7 +24,10 @@ export default function HowTo() {
           </DialogTitle>
           <DialogDescription>
             <h2 className="font-bold">Punkt über Punkt zum Sieg!</h2>
-            <a href="https://www.gamefactory-spiele.com/punto" className="text-blue-foreground">
+            <a
+              href="https://www.gamefactory-spiele.com/punto"
+              className="text-blue-foreground"
+            >
               Ein Spiel von Bernhard Weber
             </a>
           </DialogDescription>
