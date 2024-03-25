@@ -5,6 +5,8 @@ import "./global.scss";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <div className="container">
+      <App />
+    </div>
   </React.StrictMode>
 );

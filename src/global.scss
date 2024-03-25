@@ -33,6 +33,22 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    // $green: hsl(86, 64%, 44%);
+    --green: 86, 64%, 44%;
+    --green-foreground: 86, 64%, 44%;
+
+    // $red: hsl(6, 73%, 50%);
+    --red: 6, 73%, 50%;
+    --red-foreground: 6, 73%, 50%;
+
+    // $blue: hsl(195, 98%, 46%);
+    --blue: 195, 98%, 46%;
+    --blue-foreground: 195, 98%, 46%;
+
+    // $yellow: hsl(45, 100%, 47%);
+    --yellow: 45, 100%, 47%;
+    --yellow-foreground: 45, 100%, 47%;
   }
 
   .dark {
@@ -63,6 +79,22 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    // $green: hsl(86, 64%, 44%);
+    --green: 86, 64%, 44%;
+    --green-foreground: 86, 64%, 44%;
+
+    // $red: hsl(6, 73%, 50%);
+    --red: 6, 73%, 50%;
+    --red-foreground: 6, 73%, 50%;
+
+    // $blue: hsl(195, 98%, 46%);
+    --blue: 195, 98%, 46%;
+    --blue-foreground: 195, 98%, 46%;
+
+    // $yellow: hsl(45, 100%, 47%);
+    --yellow: 45, 100%, 47%;
+    --yellow-foreground: 45, 100%, 47%;
   }
 }
 
