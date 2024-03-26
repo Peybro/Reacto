@@ -8,7 +8,7 @@ import {
 import { useLanguage } from "@/components/language-provider";
 
 export function LanguageToggle() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, translation } = useLanguage();
 
   return (
     <DropdownMenu>
@@ -22,16 +22,16 @@ export function LanguageToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setLanguage("en")}>
-          🇬🇧 England
+          🇬🇧 English
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage("fr")}>
-          🇨🇵 Frankreich
+          🇨🇵 Français
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage("de")}>
-          🇩🇪 Deutschland
+          🇩🇪 Deutsch
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage("system")}>
-          System
+          {translation.theme.system}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -87,6 +87,11 @@ type Translation = {
     dismiss: string;
   };
   rename: string;
+  theme: {
+    light: string;
+    dark: string;
+    system: string;
+  };
 };
 
 const availableLanguages = ["en", "fr", "de", "system"] as const;
