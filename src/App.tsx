@@ -10,17 +10,15 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Color, Player, colors } from "./types";
-import { useEffect } from "react";
 
 function App() {
-  const { store, setStore, addValue } = useStore();
+  const { store, addValue } = useStore();
   const { translation } = useLanguage();
 
   function createRoom(): void {
@@ -52,6 +50,7 @@ function App() {
   }
 
   function rename(player: Player): void {
+    console.log(player);
     throw new Error("Function not implemented.");
   }
 
@@ -67,6 +66,7 @@ function App() {
   }
 
   function kick(player: Player): void {
+    console.log(player);
     throw new Error("Function not implemented.");
   }
 
