@@ -109,10 +109,20 @@ function App() {
         />
         {!store.lobbyConnected && (
           <>
-            <Button className="bg-blue w-full" onClick={() => createRoom()}>
+            <Button
+              className="bg-blue w-full"
+              onClick={() => createRoom()}
+              disabled={store.player.name.trim() === ""}
+            >
               {translation.createRoom}
             </Button>
-            <Button className="bg-blue w-full" onClick={() => joinRoom()}>
+            <Button
+              className="bg-blue w-full"
+              onClick={() => joinRoom()}
+              disabled={
+                store.lobbyCode.trim() === "" || store.lobbyCode.length !== 6
+              }
+            >
               {translation.joinRoom}
             </Button>
           </>
