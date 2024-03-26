@@ -1,21 +1,23 @@
+import { translations } from "@/translations";
+import { AvailableLanguages, Translation, availableLanguages } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
-
-type Language = "gb" | "fr" | "de" | "system";
 
 type LanguageProviderProps = {
   children: React.ReactNode;
-  defaultLanguage?: Language;
+  defaultLanguage?: AvailableLanguages;
   storageKey?: string;
 };
 
 type LanguageProviderState = {
-  language: Language;
-  setLanguage: (language: Language) => void;
+  language: AvailableLanguages;
+  setLanguage: (language: AvailableLanguages) => void;
+  translation: Translation;
 };
 
 const initialState: LanguageProviderState = {
   language: "system",
   setLanguage: () => null,
+  translation: translations.system,
 };
 
 const LanguageProviderContext =
@@ -27,15 +29,21 @@ export function LanguageProvider({
   storageKey = "vite-ui-language",
   ...props
 }: LanguageProviderProps) {
-  const [language, setLanguage] = useState<Language>(
-    () => (localStorage.getItem(storageKey) as Language) || defaultLanguage,
+  const [language, setLanguage] = useState<AvailableLanguages>(
+    () =>
+      (localStorage.getItem(storageKey) as AvailableLanguages) ||
+      defaultLanguage
   );
 
   useEffect(() => {
     if (language === "system") {
-      const systemLanguage = navigator.language.split("-")[0] as Language;
+      const systemLanguage = navigator.language.split(
+        "-"
+      )[0] as AvailableLanguages;
       localStorage.setItem(storageKey, "system");
-      setLanguage(systemLanguage);
+      setLanguage(
+        availableLanguages.includes(systemLanguage) ? systemLanguage : "en"
+      );
 
       return;
     }
@@ -43,10 +51,11 @@ export function LanguageProvider({
 
   const value = {
     language,
-    setLanguage: (language: Language) => {
+    setLanguage: (language: AvailableLanguages) => {
       localStorage.setItem(storageKey, language);
       setLanguage(language);
     },
+    translation: translations[language],
   };
 
   return (

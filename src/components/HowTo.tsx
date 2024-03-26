@@ -17,7 +17,7 @@ export default function HowTo() {
           ?
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="rounded-2xl">
         <DialogHeader className="mr-auto">
           <DialogTitle className="mr-auto">
             <Title />

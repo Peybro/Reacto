@@ -14,14 +14,14 @@ export function LanguageToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Button variant="outline" size="icon">
-          {language === "gb" && <span>🇬🇧</span>}
+          {language === "en" && <span>🇬🇧</span>}
           {language === "fr" && <span>🇨🇵</span>}
           {language === "de" && <span>🇩🇪</span>}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setLanguage("gb")}>
+        <DropdownMenuItem onClick={() => setLanguage("en")}>
           🇬🇧 England
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage("fr")}>
