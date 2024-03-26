@@ -1,4 +1,4 @@
-import { ModeToggle } from "./components/ThemeToggle";
+import { ModeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/components/language-provider";
@@ -16,7 +16,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Player } from "./types";
+import { Color, Player, colors } from "./types";
+import { useEffect } from "react";
 
 function App() {
   const { store, setStore, addValue } = useStore();
@@ -28,7 +29,7 @@ function App() {
       host: { ...store.player },
       lobbyConnected: true,
       lobbyCode,
-      players: [store.player],
+      players: [{ ...store.player, color: "red", deck: [], wins: 0 }],
     });
   }
 
@@ -37,7 +38,13 @@ function App() {
   }
 
   function closeRoom(): void {
-    addValue({ lobbyConnected: false, lobbyCode: "" });
+    addValue({
+      lobbyConnected: false,
+      lobbyCode: "",
+      players: [],
+      host: {},
+      roundHasStarted: false,
+    });
   }
 
   function leaveRoom(): void {
@@ -48,8 +55,15 @@ function App() {
     throw new Error("Function not implemented.");
   }
 
-  function changeColor(e, uuid: string): void {
-    throw new Error("Function not implemented.");
+  function changeColor(color: Color, uuid: string): void {
+    addValue({
+      players: store.players.map((player) => {
+        if (player.uuid === uuid) {
+          return { ...player, color: color };
+        }
+        return player;
+      }),
+    });
   }
 
   function kick(player: Player): void {
@@ -106,10 +120,16 @@ function App() {
 
         {store.lobbyConnected && (
           <>
-            <Button className="bg-red w-full" onClick={() => closeRoom()}>
+            <Button
+              className="bg-dark text-red-foreground border border-red w-full"
+              onClick={() => closeRoom()}
+            >
               {translation.closeRoom}
             </Button>
-            <Button className="bg-yellow w-full" onClick={() => leaveRoom()}>
+            <Button
+              className="bg-dark text-yellow-foreground border border-yellow w-full"
+              onClick={() => leaveRoom()}
+            >
               {translation.leaveRoom}
             </Button>
           </>
@@ -129,30 +149,31 @@ function App() {
             {store.players.map((player, i) => {
               return (
                 <DropdownMenu key={i}>
-                  <DropdownMenuTrigger className="w-full" asChild>
-                    <Button variant="outline">{player.name}</Button>
+                  <DropdownMenuTrigger className={`bg-${player.color}`} asChild>
+                    <Button className="">{player.name}</Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-full">
+                  <DropdownMenuContent>
                     <DropdownMenuItem onClick={() => rename(player)}>
                       Umbenennen
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuRadioGroup
-                      value="red"
-                      onValueChange={(e) => changeColor(e, player.uuid)}
+                      value={player.color as string}
+                      onValueChange={(newVal) =>
+                        changeColor(newVal as Color, player.uuid)
+                      }
                     >
-                      <DropdownMenuRadioItem value="red">
-                        Rot
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="blue">
-                        Blau
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="yellow">
-                        Gelb
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="green">
-                        Grün
-                      </DropdownMenuRadioItem>
+                      {colors.map((color) => {
+                        return (
+                          <DropdownMenuRadioItem
+                            key={color}
+                            value={color}
+                            className={`text-${color}-foreground`}
+                          >
+                            {translation.colors[color]}
+                          </DropdownMenuRadioItem>
+                        );
+                      })}
                     </DropdownMenuRadioGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => kick(player)}>
@@ -179,7 +200,7 @@ function App() {
                   {translation.startGame.new}
                 </Button>
                 <Button
-                  className="bg-dark text-yellow-foreground border border-yellow-400"
+                  className="bg-dark text-yellow-foreground border border-yellow"
                   onClick={() => endRound()}
                 >
                   {translation.endRound}

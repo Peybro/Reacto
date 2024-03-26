@@ -32,17 +32,17 @@ export function LanguageProvider({
   const [language, setLanguage] = useState<AvailableLanguages>(
     () =>
       (localStorage.getItem(storageKey) as AvailableLanguages) ||
-      defaultLanguage
+      defaultLanguage,
   );
 
   useEffect(() => {
     if (language === "system") {
       const systemLanguage = navigator.language.split(
-        "-"
+        "-",
       )[0] as AvailableLanguages;
       localStorage.setItem(storageKey, "system");
       setLanguage(
-        availableLanguages.includes(systemLanguage) ? systemLanguage : "en"
+        availableLanguages.includes(systemLanguage) ? systemLanguage : "en",
       );
 
       return;

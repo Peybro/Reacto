@@ -89,5 +89,5 @@ export const lang_de: Translation = {
     light: "Hell",
     dark: "Dunkel",
     system: "System",
-  }
+  },
 };
